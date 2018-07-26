@@ -1,10 +1,9 @@
 package com.watchme.controller;
 
-import com.watchme.entity.TbUser;
 import com.watchme.service.IUserService;
+import com.watchme.entity.TbUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;

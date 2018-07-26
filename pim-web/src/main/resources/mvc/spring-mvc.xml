@@ -32,7 +32,7 @@
 	<mvc:default-servlet-handler/>
 
 	<!-- 定义无需Controller的url<->view直接映射 -->
-	<mvc:view-controller path="/" view-name="redirect:/login"/>
+	<!--<mvc:view-controller path="/" view-name="redirect:/login"/>-->
 	<!-- 使用FastJaon的json转换类 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">

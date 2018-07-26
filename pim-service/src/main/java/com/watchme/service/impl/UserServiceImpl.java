@@ -16,7 +16,7 @@ import java.util.Map;
  */
 @Service
 @Transactional
-public class UserServiceImpl extends ServiceImpl<UserMapper, TbUser> implements IUserService{
+public class UserServiceImpl extends ServiceImpl<UserMapper, TbUser> implements IUserService {
 
     public List<TbUser> qryAllUser(Map<String, Object> map) {
         Map<String,Object> columnMap = new HashMap<String,Object>();
