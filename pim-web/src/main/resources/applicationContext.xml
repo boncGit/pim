@@ -15,6 +15,7 @@
 		http://www.springframework.org/schema/aop/spring-aop.xsd"
        default-lazy-init="false">
 
-    <import resource="classpath*:spring/**.xml" />
+
+    <import resource="classpath:spring/**.xml" />
 
 </beans>

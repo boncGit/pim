@@ -53,15 +53,15 @@
     <bean id="dataSourcePim" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 
         <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
-        <property name="driverClassName" value="${jdbc.driver}" />
+        <!--<property name="driverClassName" value="${jdbc.driver}" />-->
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
+        <property name="url" value="jdbc:mysql://localhost:3306/ssm?characterEncoding=utf8" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
         <!-- 配置初始化大小、最小、最大 -->
-        <property name="initialSize" value="${jdbc.pool.minIdle}" />
-        <property name="minIdle" value="${jdbc.pool.minIdle}" />
-        <property name="maxActive" value="${jdbc.pool.maxActive}" />
+        <!--<property name="initialSize" value="${jdbc.pool.minIdle}" />-->
+        <!--<property name="minIdle" value="${jdbc.pool.minIdle}" />-->
+        <!--<property name="maxActive" value="${jdbc.pool.maxActive}" />-->
         <!-- 配置获取连接等待超时的时间 -->
         <property name="maxWait" value="60000" />
         <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
@@ -75,15 +75,15 @@
     </bean>
     <bean id="dataSourceErp" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
-        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
+        <property name="url" value="jdbc:mysql://localhost:3306/ssm?characterEncoding=utf8" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
         <!-- 配置初始化大小、最小、最大 -->
-        <property name="initialSize" value="${jdbc.pool.minIdle}" />
-        <property name="minIdle" value="${jdbc.pool.minIdle}" />
-        <property name="maxActive" value="${jdbc.pool.maxActive}" />
+        <!--<property name="initialSize" value="${jdbc.pool.minIdle}" />-->
+        <!--<property name="minIdle" value="${jdbc.pool.minIdle}" />-->
+        <!--<property name="maxActive" value="${jdbc.pool.maxActive}" />-->
         <!-- 配置获取连接等待超时的时间 -->
         <property name="maxWait" value="60000" />
         <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
@@ -98,18 +98,6 @@
 
 
  	<!-- MyBatis begin -->
-    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
-        <!--<property name="dataSource" ref="dataSource"/>-->
-        <!--<property name="mapperLocations" value="classpath*:mapping/**/*Mapper.xml"></property>-->
-        <!--<property name="typeAliasesPackage" value="com.watchme"/>-->
-        <!--<property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; 扫描basePackage下所有以@MyBatisRepository注解的接口&ndash;&gt;-->
-    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
-        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
-        <!--<property name="basePackage" value="com.watchme"/>-->
-        <!--<property name="annotationClass" value="com.watchme.annotation.MyBatisDao"/>-->
-    <!--</bean>-->
 
     <!-- 配置MyBatis-plus的SqlSession -->
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
@@ -117,7 +105,7 @@
         <!-- 配置MyBatis的配置的文件 -->
         <property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"></property>
         <!-- 别名处理 -->
-        <property name="typeAliasesPackage" value="com.watchme"></property>
+        <!--<property name="typeAliasesPackage" value="com.watchme"></property>-->
         <!-- 注入MP的全局策略配置  -->
         <property name="globalConfig"  ref="globalConfiguration"></property>
         <!-- 插件注册 -->
