@@ -28,17 +28,6 @@
     <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-
-    <!-- 配置namedParameterJdbcTemplate -->
-    <bean id="jdbc" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg ref="dataSource" />
-    </bean>
-
-    <!-- 配置jdbcCall 用于调用存储过程和数据库函数 ,不要使用单例模式!!!!!! -->
-    <bean id="jdbcCall" scope="prototype"  class="org.springframework.jdbc.core.simple.SimpleJdbcCall">
-        <constructor-arg ref="dataSource" />
-    </bean>
-
     <!-- 多数据源配置 -->
     <bean id="dataSource" class="com.watchme.wm.dataSource.DataSources">
         <property name="targetDataSources">
