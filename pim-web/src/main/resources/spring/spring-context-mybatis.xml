@@ -62,28 +62,28 @@
         <property name="testOnBorrow" value="false" />
         <property name="testOnReturn" value="false" />
     </bean>
-    <bean id="dataSourceErp" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <!-- 基本属性 url、user、password -->
-        <property name="url" value="jdbc:mysql://localhost:3306/ssm?characterEncoding=utf8" />
-        <property name="username" value="root" />
-        <property name="password" value="root" />
-        <!-- 配置初始化大小、最小、最大 -->
-        <!--<property name="initialSize" value="${jdbc.pool.minIdle}" />-->
-        <!--<property name="minIdle" value="${jdbc.pool.minIdle}" />-->
-        <!--<property name="maxActive" value="${jdbc.pool.maxActive}" />-->
-        <!-- 配置获取连接等待超时的时间 -->
-        <property name="maxWait" value="60000" />
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-        <property name="timeBetweenEvictionRunsMillis" value="60000" />
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="minEvictableIdleTimeMillis" value="300000" />
-        <property name="validationQuery" value="SELECT 1 FROM DUAL" />
-        <property name="testWhileIdle" value="true" />
-        <property name="testOnBorrow" value="false" />
-        <property name="testOnReturn" value="false" />
-    </bean>
+    <!--<bean id="dataSourceErp" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">-->
+        <!--&lt;!&ndash; 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass &ndash;&gt;-->
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
+        <!--&lt;!&ndash; 基本属性 url、user、password &ndash;&gt;-->
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/ssm?characterEncoding=utf8" />-->
+        <!--<property name="username" value="root" />-->
+        <!--<property name="password" value="root" />-->
+        <!--&lt;!&ndash; 配置初始化大小、最小、最大 &ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="initialSize" value="${jdbc.pool.minIdle}" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="minIdle" value="${jdbc.pool.minIdle}" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="maxActive" value="${jdbc.pool.maxActive}" />&ndash;&gt;-->
+        <!--&lt;!&ndash; 配置获取连接等待超时的时间 &ndash;&gt;-->
+        <!--<property name="maxWait" value="60000" />-->
+        <!--&lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="60000" />-->
+        <!--&lt;!&ndash; 配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="minEvictableIdleTimeMillis" value="300000" />-->
+        <!--<property name="validationQuery" value="SELECT 1 FROM DUAL" />-->
+        <!--<property name="testWhileIdle" value="true" />-->
+        <!--<property name="testOnBorrow" value="false" />-->
+        <!--<property name="testOnReturn" value="false" />-->
+    <!--</bean>-->
 
 
  	<!-- MyBatis begin -->
@@ -91,25 +91,23 @@
     <!-- 配置MyBatis-plus的SqlSession -->
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+        <!-- 自动扫描Mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:mapping/*/*.xml"/>
+        <!--<property name="typeAliasesPackage" value="com.baomidou.springmvc.model.*"/>-->
+        <!--<property name="typeEnumsPackage" value="com.baomidou.springmvc.model.enums"/>-->
+        <property name="plugins">
+            <array>
+                <!-- 分页插件配置 -->
+                <bean id="paginationInterceptor" class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
+                </bean>
+            </array>
+        </property>
         <!-- 配置MyBatis的配置的文件 -->
         <property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"></property>
         <!-- 别名处理 -->
         <!--<property name="typeAliasesPackage" value="com.watchme"></property>-->
         <!-- 注入MP的全局策略配置  -->
         <property name="globalConfig"  ref="globalConfiguration"></property>
-        <!-- 插件注册 -->
-        <property name="plugins">
-            <list>
-                <!-- 注册分页插件 -->
-                <bean  class="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></bean>
-                <!-- 注册性能分析插件 -->
-                <bean  class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
-                    <property name="format" value="true"></property>
-                    <!-- <property name="maxTime" value="5"></property>	 -->
-                </bean>
-            </list>
-        </property>
-
     </bean>
 
     <!-- MP的全局策略配置 -->
@@ -131,7 +129,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 自动扫描 com.imooc.dao下的interface,并加入IOC容器 -->
+        <!-- 自动扫描 com.watchme.mapper下的interface,并加入IOC容器 -->
         <property name="basePackage" value="com.watchme.mapper" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>

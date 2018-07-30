@@ -23,8 +23,8 @@ public class UserController {
     private IUserService iUserService;
 
     @ResponseBody
-    @RequestMapping(value = "forwardUserList",method = RequestMethod.GET)
-    public List<TbUser> getUsers(){
+    @RequestMapping(value = "qryUsers",method = RequestMethod.GET)
+    public List<TbUser> qryUsers(){
         Map<String,Object> params = new HashMap<String,Object>();
         List<TbUser> list = iUserService.qryAllUser(params);
         return list;

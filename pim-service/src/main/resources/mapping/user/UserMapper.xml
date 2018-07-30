@@ -1,97 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.watchme.analysis.logs.mapping.DsSysExLogMapper">
+<mapper namespace="com.watchme.mapper.UserMapper">
 
-	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.watchme.analysis.logs.entity.DsSysExLog">
-		<id column="ID" property="id" />
-		<result column="SYS_ID" property="sysId" />
-		<result column="SYS_NAME" property="sysName" />
-		<result column="USER_ID" property="userId" />
-		<result column="USER_NAME" property="userName" />
-		<result column="IP_ADDR" property="ipAddr" />
-		<result column="IS_SUCCESS" property="isSuccess" />
-		<result column="ERR_TYPE" property="errType" />
-		<result column="ERR_DESC" property="errDesc" />
-		<result column="CREATOR" property="creator" />
-		<result column="CREATE_TIME" property="createTime" />
-	</resultMap>
-
-	<select id="selectAllException" parameterType="java.util.Map" resultType="java.util.Map">
-			SELECT ID "id",
-				SYS_ID "sysId",
-				SYS_NAME "sysName",
-				USER_ID "userId",
-				USER_NAME "userName",
-				IP_ADDR "ipAddr",
-				IS_SUCCESS "isSuccess",
-				ERR_TYPE "errType",
-				ERR_DESC "errDesc",
-				CREATOR "creator",
-				CREATE_TIME "createTime"
-			FROM
-				ds_sys_ex_log
-			WHERE IS_SUCCESS = '1'
-            <if test=" null != sysId and '' != sysId">
-                and SYS_ID = #{sysId}
-            </if>
-			<if test=" null != userId and '' != userId">
-				and user_id = #{userId}
-			</if>
-			<if test=" null != startTime and '' != startTime">
-				and DATE_FORMAT(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> DATE_FORMAT(#{startTime}, '%Y-%m-%d')
-			</if>
-
-			<if test=" null != endTime and '' != endTime">
-				and DATE_FORMAT(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> DATE_FORMAT(#{endTime}, '%Y-%m-%d')
-			</if>
-	</select>
-
-	<select id="selectUserException" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT
-			user_id "userId",
-			count(*) total
-		FROM ds_sys_ex_log
-		 where IS_SUCCESS = '1'
-        <if test=" null != sysId and '' != sysId">
-            and SYS_ID = #{sysId}
-        </if>
-		<if test=" null != startTime and '' != startTime">
-			and DATE_FORMAT(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> DATE_FORMAT(#{startTime}, '%Y-%m-%d')
-		</if>
-
-		<if test=" null != endTime and '' != endTime">
-			and DATE_FORMAT(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> DATE_FORMAT(#{endTime}, '%Y-%m-%d')
-		</if>
-		GROUP BY
-			user_id
-		order by total desc limit 0,10
-	</select>
-
-	<select id="selectExceptionType" parameterType="java.util.Map" resultType="java.util.Map">
-			SELECT
-				CASE WHEN err_type = '1' THEN 'IP地址异常'
-				WHEN err_type = '2' THEN '时间异常'
-				WHEN err_type = '3' THEN '频次异常' end errType,
-				count(*) total
-			FROM
-				ds_sys_ex_log
-			where IS_SUCCESS = '1'
-                <if test=" null != sysId and '' != sysId">
-                    and SYS_ID = #{sysId}
-                </if>
-				<if test=" null != userId and '' != userId">
-					and user_id = #{userId}
-				</if>
-				<if test=" null != startTime and '' != startTime">
-					and DATE_FORMAT(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> DATE_FORMAT(#{startTime}, '%Y-%m-%d')
-				</if>
-
-				<if test=" null != endTime and '' != endTime">
-					and DATE_FORMAT(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> DATE_FORMAT(#{endTime}, '%Y-%m-%d')
-				</if>
-			GROUP BY
-				err_type
-	</select>
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id
+	</sql>
 
 </mapper>
